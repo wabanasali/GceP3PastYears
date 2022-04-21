@@ -1,0 +1,54 @@
+#include <stdio.h>
+int n, d, c,t, table[1000];
+void sortAsc(int table[n]);
+void sortDsc(int table[n]);
+int main(int argc, char *argv[])
+{
+	printf("Enter the number of elements to be sorted\n");
+	scanf("%d", &n);
+	
+	printf("Enter %d integers\n", n);
+	
+	for(c = 0; c < n; c++)
+	{
+		scanf("%d", &table[c]);
+		printf("Enter the next integer\n");
+	}
+	printf("Thank you for your patience. Let me now sort it for you\n");
+	sortDsc(table);
+	/*outputing a list sorted in ascending order*/
+	for (c = 0; c < n; c++)
+	{
+		printf("%d \t", table[c]
+			);
+	}
+    return 0;
+}
+void sortAsc(int table[1000])
+{
+	for(c = 1; c < n-1; c++)
+	{
+		d = c;
+		while(d != 0 && table[d] < table[d-1])
+		{
+			t = table[d];
+			table[d] = table[d-1];
+			table[d-1] = t;
+			d -= 1;
+		}
+	}
+}
+void sortDsc(int table[1000])
+{
+	for(c = 1; c < n-1; c++)
+	{
+		d = c;
+		while(d != 0 && table[d] > table[d-1])
+		{
+			t = table[d];
+			table[d] = table[d-1];
+			table[d-1] = t;
+			d -= 1;
+		}
+	}
+}
