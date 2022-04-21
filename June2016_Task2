@@ -4,17 +4,20 @@ void sortAsc(int table[n]);
 void sortDsc(int table[n]);
 int main(int argc, char *argv[])
 {
+	/*Prompting user for number of elements to be sorted*/
 	printf("Enter the number of elements to be sorted\n");
 	scanf("%d", &n);
-	
+	/*Prompting user for marks to be sorted*/
 	printf("Enter %d integers\n", n);
 	
 	for(c = 0; c < n; c++)
 	{
 		scanf("%d", &table[c]);
+		/*Keeping the user aware that they are not done entering marks*/
 		printf("Enter the next integer\n");
 	}
 	printf("Thank you for your patience. Let me now sort it for you\n");
+	/*Function call of bubble sort in descending fashion, could be replaced by sortAsc call for ascending fashion*/
 	sortDsc(table);
 	/*outputing a list sorted in ascending order*/
 	for (c = 0; c < n; c++)
@@ -24,6 +27,7 @@ int main(int argc, char *argv[])
 	}
     return 0;
 }
+/*Function definition of bubble sort in ascending fashion*/
 void sortAsc(int table[1000])
 {
 	for(c = 1; c < n-1; c++)
@@ -38,6 +42,7 @@ void sortAsc(int table[1000])
 		}
 	}
 }
+/*Function definition of bubble sort in descending fashion*/
 void sortDsc(int table[1000])
 {
 	for(c = 1; c < n-1; c++)
