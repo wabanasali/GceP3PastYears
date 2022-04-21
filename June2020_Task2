@@ -1,0 +1,109 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+/*Function declarations*/
+void doDisplay(char *arr[15]);
+void select_sort(char *arr[15]);
+void bin_search_rec(char *arr[15], char *name, int min, int max);
+void bin_search(char *arr[15], char *name, int min, int max);
+
+bool found = false;
+int position = 1;
+
+int main(int argc, char *argv[])
+{
+    /*an array of 15 strings/pointers*/
+	char * councilor[15];
+	//initialize the array as follows
+	councilor[0] = "Bert";
+	councilor[1] = "Jeff";
+	councilor[2] = "Gary";
+	councilor[3] = "Neba";
+	councilor[4] = "Chang";
+	councilor[5] = "Olga";
+	councilor[6] = "Nora";
+	councilor[7] = "Mary";
+	councilor[8] = "Vera";
+	councilor[9] = "Rani";
+	councilor[10] = "Neil";
+	councilor[11] = "Jill";
+	councilor[12] = "Cain";
+	councilor[13] = "Lara";
+	councilor[14] = "Bart";
+  /*Call of the select_sort method*/
+	select_sort(councilor);
+  /*Call of the doDisplay method*/
+  doDisplay(councilor);
+  /*Call of the bin_search method*/
+	bin_search(councilor, "Bert", 0, 14);
+    return 0;
+}
+/*Function definitions for the various functions*/
+void doDisplay(char *arr[15])
+{
+	int i;
+	for (i = 0; i < 15; i++)
+	{
+		printf("%s\n", arr[i]);
+	}
+}
+
+void select_sort(char *arr[15])
+{
+	int i, min, j;
+	char *tmp;
+	for (i = 0; i < 15; i++)
+	{
+		//set current element as minimum
+		min = i;
+		//check element as minimum
+		for (j = i+1; j < 15; j++)
+		{
+			if (strcmp(arr[j], arr[min]) > 0)
+			{
+				min = j;
+			}
+			//swap the minimum element with the current element
+			tmp = arr[i];
+			arr[i] = arr[min];
+			arr[min] = tmp;
+		}
+	}
+}
+
+void bin_search_rec(char *arr[15], char *name, int min, int max)
+{
+	int bottom = min;
+	int top = max;
+	int mid;
+	if (min <= max)
+	{
+		mid = (min = max)/2;
+		if (strcmp(arr[mid], name) == 0)
+		{
+			found = true;
+			position = mid;
+		}
+		else if (strcmp(arr[mid],name) < 0)
+		{
+			bin_search_rec(arr, name, mid+1, top);
+		}
+		else
+		{
+			bin_search_rec(arr, name, bottom, mid-1);
+		}
+	}
+}
+
+void bin_search(char *arr[15], char *name, int min, int max)
+{
+	bin_search_rec(arr, name, min, max);
+	if (found == false)
+	{
+		printf("Name not found\n");
+	}
+	else
+	{
+		printf("%s\n", arr[position]);
+	}
+}
