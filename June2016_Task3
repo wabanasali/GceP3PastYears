@@ -1,0 +1,27 @@
+#include <stdio.h>
+/*declaration of factorial function*/
+int facto(int n);
+int main(int argc, char *argv[])
+{
+  int num;
+  /*Prompting user for input so that its factorial can be calculated*/
+	printf("Enter your choice number and I will calculate its factorial\n");
+	scanf("%d", &num);
+  /*Calculation and display of factorial*/
+	printf("%d! = %d\n", num, facto(num));
+  return 0;
+}
+/*definition of factorial function*/
+int facto(int n)
+{
+	int result;
+	if (n == 0 || n == 1)
+	{
+		result = 1;
+	}
+	else
+	{
+		result = n*facto(n-1);
+	}
+	return result;
+}
