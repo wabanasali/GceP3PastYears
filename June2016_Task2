@@ -1,5 +1,7 @@
 #include <stdio.h>
+/*Declaration of global variables*/
 int n, d, c,t, table[1000];
+/*Function declaration for ascending respectively descending bubble sort*/
 void sortAsc(int table[n]);
 void sortDsc(int table[n]);
 int main(int argc, char *argv[])
