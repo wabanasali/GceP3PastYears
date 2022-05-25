@@ -1,0 +1,119 @@
+
+#include <stdio.h>
+#define N 6
+void populate_meter(int r[N],int indicator);
+void units_consumed(int r1[N], int r2[N], int r3[N]);
+float net_bill(int units);
+void histogram(int r[N]);
+void sortAsc(int table[N]);
+int main(int argc, char *argv[])
+{
+    /* TODO: Enter code here */
+	int r1[N], r2[N], r3[N];
+	//int r1[] = {1023, 1101, 1011, 1199, 1110, 1210};
+	//int r2[] = {1103, 1225, 1110, 1203, 1210, 2100};
+	//int r3[] = {0, 0, 0, 0, 0, 0};
+	populate_meter(r1,1);
+	populate_meter(r2,2);
+	units_consumed(r1, r2, r3);
+    return 0;
+}
+void populate_meter(int r[N],int indicator)
+{
+	int i;
+	char *ptr;
+	if(indicator == 1)
+	{
+		ptr = "Previous";
+		for(i = 0; i < N; i++)
+		{
+			printf("Enter %s meter reading for meter %d\n",ptr, i+1);
+			scanf("%d",&r[i]);
+		}
+	}
+	else
+	{
+		ptr = "Current";
+		for(i = 0; i < N; i++)
+		{
+			printf("Enter %s meter reading for meter %d\n",ptr, i+1);
+			scanf("%d",&r[i]);
+		}
+	}
+}
+void units_consumed(int r1[N], int r2[N], int r3[N])
+{
+	int i;
+	float net_b;
+	printf("================================================================================\n");
+	printf("Previous Reading\tCurrent Reading\t\tUnits Consumed\tAmount Due\n");
+	printf("================================================================================\n");
+	for(i = 0; i < N; i++)
+	{
+		r3[i] = r2[i] - r1[i];
+		net_b = net_bill(r3[i]);
+			printf("\t%d\t\t*\t%d\t\t*\t%d\t*\t%.2f\n", r1[i], r2[i], r3[i],net_b);
+			printf("================================================================================\n");
+	}
+	printf("\n\n\n");
+	//histogram(r3);
+}
+float net_bill(int units)
+{
+	float net;
+	if (units > 100)
+	{
+		net = 1.018*100*units + 500;
+	}
+	else
+	{
+		net = 1.018*65*units + 500;
+	}
+	return net;
+}
+void histogram(int r[N])
+{
+	int i,j,max,divisor;
+	int tmp_arr[N] ={r[0], r[1], r[2], r[3], r[4], r[5]};
+	sortAsc(tmp_arr);
+	max = tmp_arr[5];
+	divisor = tmp_arr[1];
+	//sort array in ascending order, make second index divisor and uppermost index max
+	for(i = 0; i < N; i++)
+	{
+		//printf("%d=>",r[i]);
+		for(j = 0; j < r[i]/(max/divisor); j++)
+		{
+			printf("*");
+		}
+		printf("\n");
+		for(j = 0; j < r[i]/(max/divisor); j++)
+		{
+			printf("*");
+			
+		}
+		printf("%d",r[i]);
+		printf("\n");
+		for(j = 0; j < r[i]/(max/divisor); j++)
+		{
+			printf("*");
+		}
+		printf("\n");
+	}
+	printf("\nHistogram of consumption\n\n\n");
+}
+void sortAsc(int table[N])
+{
+	int c, d, t;
+	for(c = 1; c < N; c++)
+	{
+		d = c;
+		while(d != 0 && table[d] < table[d-1])
+		{
+			t = table[d];
+			table[d] = table[d-1];
+			table[d-1] = t;
+			d -= 1;
+		}
+	}
+}
